@@ -1,0 +1,637 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#080b13"><title>音乐星际 · 在声音之间漫游</title>
+  <style>:root{font-family:Inter,"PingFang SC","Microsoft YaHei",sans-serif;color:#eceef7;background:#080b13;font-synthesis:none;--muted:#959baa;--line:rgba(177,191,222,.16);--accent:#d2c2ff}*{box-sizing:border-box}body{margin:0;overflow:hidden}button,input,select{font:inherit}button,a,input,select{-webkit-tap-highlight-color:transparent}button{cursor:pointer;color:inherit}button:disabled{cursor:default;opacity:.35}button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,canvas:focus-visible{outline:2px solid #cfc0fa;outline-offset:4px}[hidden]{display:none!important}#galaxy{position:fixed;inset:0;width:100%;height:100%;touch-action:none;cursor:grab}#galaxy:active{cursor:grabbing}.topbar{position:fixed;top:0;left:0;right:0;display:flex;justify-content:space-between;align-items:center;padding:28px 38px;background:linear-gradient(#080b13d9,transparent);pointer-events:none}.topbar>*{pointer-events:auto}.brand{display:flex;gap:13px;color:inherit;text-decoration:none;font-size:18px;font-weight:600;letter-spacing:3px}.brand-icon{font-size:38px;line-height:44px;color:#d2c2ff;font-weight:400}.brand small{display:block;font-size:9px;color:#9e9bb2;letter-spacing:2.7px;margin-top:5px;font-weight:400}.top-actions{display:flex;align-items:center;gap:14px}.demo-tag{font-size:11px;color:#b4abc8;border:1px solid #a9a0c132;border-radius:30px;padding:7px 13px;background:#11101b66}.icon-button{background:transparent;border:0;font-size:24px;width:34px;height:34px;display:grid;place-items:center;color:#bfc5d8}.icon-button:hover{color:#fff;background:#ffffff0b;border-radius:9px}.intro{position:fixed;top:137px;left:42px;pointer-events:none;transition:opacity .5s}.intro.quiet{opacity:0}.eyebrow{color:#b8a9d4;font-size:10px;letter-spacing:3.3px;margin-bottom:20px}h1{font-size:clamp(25px,3.2vw,42px);font-weight:400;line-height:1.5;letter-spacing:3px;margin:0}.intro p{font-size:12px;color:#939aad;line-height:1.9;max-width:260px}.genre-nav{position:fixed;left:40px;top:390px;width:140px;pointer-events:none}.genre-nav>*{pointer-events:auto}.nav-caption{font-size:10px;color:#8f96a9;letter-spacing:2px;display:block;margin-bottom:15px}#genre-buttons{display:flex;flex-direction:column;gap:5px}.genre-button{background:transparent;border:1px solid transparent;text-align:left;padding:8px 12px 8px 0;display:flex;align-items:center;gap:10px;font-size:12px;color:#a8aec0;border-radius:7px}.genre-button i{width:5px;height:5px;border-radius:50%;background:var(--genre);box-shadow:0 0 10px var(--genre)}.genre-button.active{color:#faf8ff;background:#d2c2ff0b;border-color:#d2c2ff22;padding-left:10px}.genre-button:hover{color:#fff}.panel{position:fixed;border:1px solid var(--line);background:linear-gradient(150deg,#171b29f5,#0c101af5);backdrop-filter:blur(24px);border-radius:18px;box-shadow:0 18px 80px #0005;z-index:5;padding:22px}.panel-heading{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:17px}.panel h2{font-size:18px;font-weight:500;letter-spacing:1px;margin:0}.catalog-panel{left:32px;top:108px;width:330px;max-height:calc(100dvh - 230px);display:flex;flex-direction:column}.field-label{display:block;font-size:11px;color:#abb0c1;margin:12px 0 8px}input[type=search],select{width:100%;background:#080c1670;color:#e6e8f2;border:1px solid var(--line);padding:11px;border-radius:8px;font-size:12px}select{color-scheme:dark}.results-meta{display:flex;align-items:center;justify-content:space-between;font-size:11px;color:#8f97ad;margin:18px 0 12px}.text-button{background:none;border:0;color:#c6b9e5;font-size:11px;padding:4px}.results{overflow:auto;min-height:0;scrollbar-width:thin}.result{width:100%;background:transparent;border:0;border-bottom:1px solid #ffffff07;padding:12px 4px;text-align:left;color:#dee1ed}.result:hover{background:#ffffff06}.result strong{font-size:13px;font-weight:400;display:block}.result small{color:#858fa7;font-size:10px;display:block;margin-top:5px}.detail-panel{right:30px;top:110px;width:320px;max-height:calc(100dvh - 230px);overflow:auto;scrollbar-width:thin}.detail-orb{height:104px;display:grid;place-items:center;background:radial-gradient(ellipse,var(--orb-color),transparent 65%);margin-bottom:18px}.detail-orb span{width:52px;height:52px;border-radius:50%;box-shadow:inset -15px -12px 20px #070c2199,0 0 34px var(--orb-color);background:radial-gradient(circle at 30% 25%,#ffffffcc,var(--orb-color) 65%)}.tag{display:inline-block;font-size:10px;color:#b8bed3;padding:4px 7px;background:#ffffff07;border:1px solid #ffffff0d;border-radius:5px;margin-right:5px}.description{font-size:12px;color:#a2aabc;line-height:1.9;margin:17px 0}.section-caption{font-size:11px;letter-spacing:1px;color:#9ba4ba;margin:23px 0 10px}.track-row{display:flex;align-items:center;gap:9px;padding:12px 0;border-bottom:1px solid #ffffff08}.track-row button{flex:1;text-align:left;background:none;border:0;font-size:12px;padding:4px;color:#d2d7e6}.track-row small{font-size:10px;color:#7f8aa2}.track-row .track-dot{width:5px;height:5px;border-radius:50%;background:#b7a6e8}.primary-button{display:block;width:100%;padding:12px;border:1px solid #c6b2fa40;border-radius:9px;background:#9e80df1c;font-size:12px;color:#e7dfff;margin-top:16px}.primary-button:hover{background:#9e80df30}.metric-row{display:flex;justify-content:space-between;padding:13px 0;color:#9da6bb;font-size:11px;border-bottom:1px solid #ffffff0a}.metric-row strong{color:#d4cae8;font-weight:400}.neighbors{display:flex;gap:6px;flex-wrap:wrap}.neighbors button{background:#ffffff06;border:1px solid #ffffff0a;border-radius:6px;font-size:11px;padding:7px}.settings-panel{right:30px;top:100px;width:280px}.check-label{display:flex;align-items:center;gap:8px;font-size:12px;margin:22px 0}.muted{font-size:11px;color:#919bb1;line-height:1.8}.stats{font-size:11px;color:#8997ab;border-top:1px solid var(--line);padding-top:12px;line-height:1.8}.tooltip{position:fixed;background:#101522e8;border:1px solid var(--line);border-radius:9px;padding:10px 14px;font-size:12px;pointer-events:none;z-index:7}.tooltip small{display:block;font-size:10px;color:#9dabc0;margin-top:4px}.scene-footer{position:fixed;bottom:127px;left:40px;right:38px;display:flex;justify-content:space-between;align-items:center;pointer-events:none}.scene-footer>*{pointer-events:auto}.location{font-size:11px;display:flex;align-items:center;gap:9px;color:#a0a9bb}.live-dot{width:5px;height:5px;border-radius:50%;background:#b9a4e9}.separator{margin:0 4px;color:#4c5260}.view-controls{display:flex;border:1px solid var(--line);border-radius:10px;background:#131822b0;overflow:hidden}.view-controls button{background:none;border:0;color:#b8c1d5;width:37px;height:35px;font-size:18px}.view-controls button:hover{background:#ffffff0a}.gesture-hint{position:fixed;left:0;right:0;text-align:center;bottom:99px;font-size:10px;color:#8490a8;pointer-events:none;letter-spacing:.4px}.gesture-hint span{margin:0 12px;color:#525c70}.player-bar{position:fixed;bottom:0;left:0;right:0;height:82px;display:flex;gap:18px;align-items:center;padding:0 38px;border-top:1px solid var(--line);background:#0d111ded;backdrop-filter:blur(20px);z-index:8}.album-art{width:43px;height:43px;border:1px solid #c5b0ff33;background:radial-gradient(circle at 40% 40%,#9180b940,#171d2d);border-radius:9px;display:grid;place-items:center;font-size:20px;color:#b9ace0}.now-playing{min-width:170px;width:240px}.now-playing strong{font-size:12px;display:block;font-weight:500}.now-playing span{font-size:10px;color:#8e98ae;display:block;margin-top:7px}.play-button{height:35px;width:35px;flex-shrink:0;border:1px solid #c4b4e9;border-radius:50%;background:#b9a3ec;color:#18132a;font-size:14px;display:grid;place-items:center}.timeline{display:flex;gap:12px;align-items:center;flex:1;max-width:500px}.timeline span{font-size:10px;color:#96a0b4;font-variant-numeric:tabular-nums}progress{height:3px;width:100%;border:0;border-radius:5px;background:#252c3e;accent-color:#bba7e7}progress::-webkit-progress-bar{background:#252c3e;border-radius:5px}progress::-webkit-progress-value{background:#bba7e7;border-radius:5px}.volume-label{display:flex;gap:12px;align-items:center;font-size:10px;color:#949eb4;margin-left:auto}input[type=range]{width:76px;height:3px;accent-color:#bba7e7}.audio-note{font-size:10px;color:#9d8eb5;white-space:nowrap}.notice{position:fixed;left:50%;bottom:160px;transform:translateX(-50%);padding:12px 20px;border:1px solid var(--line);background:#151d2cf0;border-radius:12px;font-size:12px;z-index:12;max-width:80vw}.empty-state{font-size:12px;color:#acb4c7;line-height:1.8;padding:20px 0}
+@media(max-height:860px){.intro{top:112px}.intro h1{font-size:29px}.genre-nav{top:310px}#genre-buttons{gap:0}.genre-button{padding-top:6px;padding-bottom:6px}}@media(max-width:850px){.topbar{padding:22px}.intro{left:24px;top:125px}.genre-nav{left:24px;top:330px}.demo-tag{font-size:9px}.player-bar{padding:0 20px;gap:13px}.now-playing{width:180px;min-width:0}.audio-note,.volume-label{display:none}.detail-panel{right:18px;width:290px}.scene-footer{left:22px;right:22px}}@media(max-width:600px){.brand{font-size:15px;letter-spacing:2px}.brand-icon{font-size:30px}.brand small{font-size:8px}.top-actions{gap:7px}.demo-tag{max-width:95px;text-align:center;line-height:1.5;padding:4px 7px}.intro{top:116px}.intro h1{font-size:25px}.intro p{max-width:200px;font-size:11px}.genre-nav{top:auto;bottom:157px;left:20px;right:20px;width:auto}.nav-caption{display:none}#genre-buttons{flex-direction:row;overflow:auto;gap:10px;scrollbar-width:none}.genre-button{white-space:nowrap;padding:8px!important}.panel{border-radius:18px 18px 0 0}.detail-panel,.catalog-panel{top:auto;bottom:82px;left:0;right:0;width:100%;max-height:52dvh;padding:18px 24px}.detail-orb{display:none}.settings-panel{width:260px}.scene-footer{bottom:114px}.location{font-size:10px;gap:6px}#visible-count{display:none}.gesture-hint{display:none}.player-bar{height:82px;gap:12px;padding:0 18px}.album-art{width:38px;height:38px}.now-playing{flex:1}.timeline{display:none}.tooltip{max-width:180px}.description{margin:12px 0}.panel-heading{margin-bottom:10px}}@media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+  <canvas id="galaxy" tabindex="0" aria-label="音乐星空，拖动移动，滚轮缩放，Shift 加拖动旋转。也可用方向键移动，加减号缩放。"></canvas>
+  <header class="topbar">
+    <a class="brand" href="#" aria-label="音乐星际首页"><span class="brand-icon">✳</span><span>音乐星际<small>MUSIC GALAXY</small></span></a>
+    <div class="top-actions"><span class="demo-tag">交互原型 · 演示数据</span><button id="search-toggle" class="icon-button" aria-label="搜索或打开歌手列表">⌕</button><button id="settings-toggle" class="icon-button" aria-label="画质与动效设置">☷</button></div>
+  </header>
+  <section class="intro" id="intro"><div class="eyebrow">FOLLOW YOUR CURIOSITY</div><h1>下一首喜欢的歌，<br>藏在哪颗星里？</h1><p>拖动漫游，滚轮靠近。点亮一颗星，听见一个新世界。</p></section>
+  <nav class="genre-nav" aria-label="风格星云"><span class="nav-caption">探索星域</span><div id="genre-buttons"></div></nav>
+  <aside id="catalog-panel" class="panel catalog-panel" hidden aria-label="搜索与歌手列表">
+    <div class="panel-heading"><h2>寻找一颗星</h2><button class="icon-button" id="search-close" aria-label="关闭搜索">×</button></div>
+    <label class="field-label" for="search">歌手或歌曲</label><input id="search" type="search" placeholder="输入名字，或在列表里发现" autocomplete="off">
+    <label class="field-label" for="region">关联国家／地区（虚构属性）</label><select id="region"><option value="">全部地区</option value="CN">中国</option><option value="JP">日本</option><option value="US">美国</option><option value="GB">英国</option><option value="FR">法国</option></select>
+    <div class="results-meta"><span id="result-count"></span><button id="clear-filters" class="text-button">清除筛选</button></div><div id="results" class="results"></div>
+  </aside>
+  <aside id="detail-panel" class="panel detail-panel" hidden aria-label="歌手与歌曲详情"></aside>
+  <aside id="settings-panel" class="panel settings-panel" hidden aria-label="画质设置"><div class="panel-heading"><h2>漫游设置</h2><button id="settings-close" class="icon-button" aria-label="关闭设置">×</button></div><label class="field-label" for="quality">画面细节</label><select id="quality"><option value="low">轻量</option><option value="medium" selected>标准</option><option value="high">精细</option></select><label class="check-label"><input id="reduced-motion" type="checkbox">减少动态效果</label><p class="muted">系统减少动态效果设置会自动生效。开启后关闭星点闪烁、光晕脉动和镜头过渡。</p><div id="stats" class="stats"></div></aside>
+  <div id="tooltip" class="tooltip" hidden></div>
+  <div class="scene-footer"><div class="location"><span class="live-dot"></span><span id="location">宇宙漫游</span><span class="separator">/</span><span id="visible-count">200 位虚构歌手</span></div><div class="view-controls"><button id="home" aria-label="返回宇宙总览">⌂</button><button id="zoom-out" aria-label="缩小">−</button><button id="zoom-in" aria-label="放大">＋</button></div></div>
+  <div class="gesture-hint">拖动移动 <span>·</span> 滚轮缩放 <span>·</span> Shift + 拖动旋转 <span>·</span> 靠近展开歌曲</div>
+  <footer class="player-bar"><div class="album-art" id="album-art">♫</div><div class="now-playing"><strong id="player-title">让好奇心带路</strong><span id="player-subtitle">点一颗歌手星，靠近后发现歌曲</span></div><button id="play-toggle" class="play-button" disabled aria-label="播放">▶</button><div class="timeline"><span id="elapsed">0:00</span><progress id="progress" value="0" max="45" aria-label="播放进度"></progress><span>0:45</span></div><label class="volume-label">音量<input id="volume" type="range" min="0" max="1" step=".01" value=".3" aria-label="音量"></label><span class="audio-note">合成演示音频</span></footer>
+  <div id="notice" role="status" aria-live="polite" class="notice" hidden></div>
+  <script type="module">/** All entities are fictional; no third-party catalogue, recording or popularity data. */
+const SEED = 20261012;
+const VERSION = 'fictional-demo-v2';
+function randomGenerator(seed) {
+  let state = seed >>> 0;
+  return () => { state = (Math.imul(state, 1664525) + 1013904223) >>> 0; return state / 4294967296; };
+}
+const genres = [
+  ['ambient', '氛围', '#91b9ed', '在缓慢的声音里，漂浮一会儿'],
+  ['electronic', '电子', '#aaa0ff', '合成器、脉冲与深空回声'],
+  ['jazz', '爵士', '#f6c88e', '自由的节奏，不期而遇的旋律'],
+  ['indie', '独立', '#e5a2c4', '那些藏在日常缝隙里的声音'],
+  ['folk', '民谣', '#e5d9ad', '一把琴，一段缓缓展开的故事'],
+  ['classical', '古典', '#a9cddb', '听见时间，也听见空间'],
+  ['soul', '灵魂', '#dd9c87', '温暖的和声与有呼吸的律动'],
+  ['rock', '摇滚', '#b1d3a2', '让吉他划过寂静的夜空']
+].map(([id, name, color, description], i) => {
+  const angle = i / 8 * Math.PI * 2;
+  return { id, name, color, description, position: [Math.cos(angle) * 1550, Math.sin(i * 2) * 200, Math.sin(angle) * 1250] };
+});
+const prefixes = ['雾岛', '长夜', '失重', '青蓝', '雨后', '低频', '白昼', '微光', '远山', '流动', '月面', '无声', '暮色', '极地', '海岸', '夏末', '北方', '漫游', '银色', '晚风', '深空', '清晨', '暗潮', '玻璃', '回声'];
+const suffixes = ['电台', '航线', '房间', '花园', '来信', '旅人', '计划', '档案'];
+const titles = ['漂浮之间', '经过你的夜晚', '第七次日落', '没有终点的路', '留给明天的光'];
+const random = randomGenerator(SEED);
+// Deliberately uneven populations so the prototype demonstrates count-driven clouds.
+const genrePopulations = [12, 42, 18, 31, 15, 9, 24, 49];
+let artistIndex = 0;
+const artists = genres.flatMap((genre, g) => {
+  const shapeRandom = randomGenerator(SEED + g * 87);
+  const lobes = Array.from({ length: 2 + g % 3 }, () => [(shapeRandom() - .5) * 570, (shapeRandom() - .5) * 300, (shapeRandom() - .5) * 530]);
+  return Array.from({ length: genrePopulations[g] }, (_, i) => {
+  const lobe = lobes[i % lobes.length];
+  const spread = 100 + shapeRandom() * 90;
+  const offset = () => (shapeRandom() + shapeRandom() + shapeRandom() - 1.5) * spread;
+  const id = `artist_${String(++artistIndex).padStart(3, '0')}`;
+  return {
+    id, name: `${prefixes[i % prefixes.length]}${suffixes[g]}${i >= prefixes.length ? ` ${Math.floor(i / prefixes.length) + 1}` : ''}`, genreId: genre.id, color: genre.color,
+    region: ['CN', 'JP', 'US', 'GB', 'FR'][i % 5],
+    description: `${genre.description}。这是用于验证探索体验的虚构歌手，歌曲与指标均为演示。`,
+    position: genre.position.map((v, axis) => v + lobe[axis] + offset()),
+    metrics: { longTermScore: random(), recentScore: random(), activeListeners: i % 11 === 0 ? null : i % 7 === 0 ? 0 : Math.floor(random() * 65), source: 'demo' }
+  };
+  });
+});
+const tracks = artists.flatMap((artist, a) => titles.map((title, i) => ({
+  id: `track_${String(a * 5 + i + 1).padStart(4, '0')}`, artistId: artist.id,
+  title: `${title}${i === 0 ? '' : ` · ${a % 9 + 1}`}`, duration: 45, seed: a * 5 + i,
+  source: 'procedural-demo', capabilities: { canPlayHere: true, canAnalyzeAudio: true, canAggregateListeners: false },
+  metrics: { longTermScore: random(), recentScore: random(), activeListeners: i === 4 ? null : i === 3 ? 0 : Math.floor(random() * 24), source: 'demo' }
+})));
+const artistById = new Map(artists.map(a => [a.id, a]));
+const trackById = new Map(tracks.map(t => [t.id, t]));
+const tracksByArtist = new Map(artists.map(a => [a.id, tracks.filter(t => t.artistId === a.id)]));
+function normalize(value, q95 = 65) { return Math.max(0, Math.min(1, Math.log1p(Math.max(0, value)) / Math.log1p(Math.max(1, q95)))); }
+function listenerAmplitude(value) { return value === null ? 0 : .12 * normalize(value); }
+function trackPosition(artist, index) {
+  const angle = index / 5 * Math.PI * 2 + .35;
+  const radius = 155 + index * 18;
+  return [artist.position[0] + Math.cos(angle) * radius, artist.position[1] + Math.sin(angle) * radius * .75, artist.position[2] + Math.sin(angle) * 45];
+}
+
+
+function seedFromId(id) {
+  let seed = 2166136261;
+  for (let i = 0; i < id.length; i++) seed = Math.imul(seed ^ id.charCodeAt(i), 16777619);
+  return seed >>> 0;
+}
+// A fixed world-space kernel makes quantities comparable between regions.
+// Do not normalize every region by its own maximum: that makes sparse and dense regions identical.
+function cloudDensity(position, members, bandwidth = 190) {
+  let density = 0;
+  for (const member of members) {
+    const squaredDistance = member.position.reduce((sum, value, axis) => sum + (value - position[axis]) ** 2, 0);
+    density += Math.exp(-squaredDistance / (2 * bandwidth ** 2));
+  }
+  return density;
+}
+function buildCloudModel(genre, members) {
+  const ordered = [...members].sort((a, b) => a.id.localeCompare(b.id));
+  const count = ordered.length;
+  const brightness = 1 - Math.exp(-count / 32);
+  const concentration = 1 - Math.exp(-count / 24);
+  if (!count) return { count: 0, brightness: 0, concentration: 0, puffs: [], dust: [] };
+  const puffs = [], dust = [];
+  for (const member of ordered) {
+    const random = randomGenerator(seedFromId(`${genre.id}:${member.id}`));
+    for (let i = 0; i < 2; i++) {
+      const position = member.position.map(v => v + (random() - .5) * 145);
+      const density = cloudDensity(position, ordered);
+      const localConcentration = 1 - Math.exp(-density / 7);
+      puffs.push({ position, radius: 190 + random() * 160, aspect: .65 + random() * .7, rotation: random() * Math.PI, variant: Math.floor(random() * 4),
+        alpha: (.1 + brightness * .1) * localConcentration, density });
+    }
+    for (let i = 0; i < 10; i++) {
+      const position = member.position.map(v => v + (random() + random() - 1) * 140);
+      dust.push({ position, size: .3 + random() * 1.2, alpha: (.14 + random() * .5) * (.25 + concentration * .75) });
+    }
+  }
+  return { count, brightness, concentration, puffs, dust };
+}
+
+function hashNoise(x, y, seed) {
+  let hash = Math.imul(x, 374761393) ^ Math.imul(y, 668265263) ^ seed;
+  hash = Math.imul(hash ^ (hash >>> 13), 1274126177);
+  return ((hash ^ (hash >>> 16)) >>> 0) / 4294967295;
+}
+function noise(x, y, seed) {
+  const ix = Math.floor(x), iy = Math.floor(y);
+  let fx = x - ix, fy = y - iy; fx *= fx * (3 - 2 * fx); fy *= fy * (3 - 2 * fy);
+  const a = hashNoise(ix, iy, seed), b = hashNoise(ix + 1, iy, seed), c = hashNoise(ix, iy + 1, seed), d = hashNoise(ix + 1, iy + 1, seed);
+  return (a + (b - a) * fx) * (1 - fy) + (c + (d - c) * fx) * fy;
+}
+function cloudTexturePixels(color, variant, size = 128) {
+  const pixels = new Uint8ClampedArray(size * size * 4);
+  const rgb = [1, 3, 5].map(start => parseInt(color.slice(start, start + 2), 16));
+  const seed = seedFromId(`${color}:${variant}`);
+  for (let y = 0; y < size; y++) for (let x = 0; x < size; x++) {
+    const nx = x / size * 2 - 1, ny = y / size * 2 - 1;
+    const warp = noise(nx * 2.5 + 4, ny * 2.5 + 4, seed);
+    const radius = Math.hypot(nx + (warp - .5) * .4, ny + (noise(nx * 3 + 11, ny * 3 + 11, seed) - .5) * .4);
+    const envelope = Math.max(0, 1 - radius ** 2) ** 1.4;
+    const broad = noise(nx * 2.8 + 8, ny * 2.8 + 8, seed);
+    const detail = noise(nx * 9 + warp * 2 + 21, ny * 9 + warp * 2 + 21, seed);
+    const grain = noise(nx * 22 + 40, ny * 22 + 40, seed);
+    const density = Math.max(0, broad * .65 + detail * .27 + grain * .08 - .24);
+    const offset = (y * size + x) * 4;
+    pixels[offset] = rgb[0]; pixels[offset + 1] = rgb[1]; pixels[offset + 2] = rgb[2];
+    pixels[offset + 3] = Math.min(210, envelope * density * 450);
+  }
+  return pixels;
+}
+
+
+const dot = (a, b) => a[0] * b[0] + a[1] * b[1] + a[2] * b[2];
+const sub = (a, b) => a.map((v, i) => v - b[i]);
+const length = a => Math.hypot(...a);
+const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
+class GalaxyEngine {
+  constructor(canvas, { onSelect, onHover, onLevel, onStats }) {
+    this.canvas = canvas;
+    this.ctx = canvas.getContext('2d');
+    if (!this.ctx) throw new Error('此浏览器不支持 Canvas，请使用歌手列表探索。');
+    Object.assign(this, { onSelect, onHover, onLevel, onStats });
+    this.target = [0, 0, 0]; this.distance = 5700; this.yaw = .15; this.pitch = .42;
+    this.quality = 'medium'; this.reducedMotion = false; this.selected = null;
+    this.filter = { genreId: '', region: '' }; this.expanded = null; this.energy = 0;
+    this.hitNodes = []; this.pointers = new Map(); this.listeners = []; this.lastTime = 0; this.frames = [];
+    const random = randomGenerator(4142);
+    this.stars = Array.from({ length: 2200 }, () => ({ x: random(), y: random(), size: random(), phase: random() * Math.PI * 2 }));
+    this.haloTextures = new Map(); this.cloudTextures = new Map();
+    this.cloudModels = genres.map(genre => buildCloudModel(genre, artists.filter(a => a.genreId === genre.id)));
+    this.resizeObserver = new ResizeObserver(() => this.resize()); this.resizeObserver.observe(canvas);
+    this.listen(canvas, 'pointerdown', e => this.pointerDown(e));
+    this.listen(canvas, 'pointermove', e => this.pointerMove(e));
+    this.listen(canvas, 'pointerup', e => this.pointerUp(e));
+    this.listen(canvas, 'pointercancel', () => { this.pointers.clear(); this.down = null; });
+    this.listen(canvas, 'pointerleave', () => { if (!this.pointers.size) this.onHover(null); });
+    this.listen(canvas, 'wheel', e => { e.preventDefault(); this.zoom(Math.exp(clamp(e.deltaY, -180, 180) * .002), e.clientX, e.clientY); }, { passive: false });
+    this.listen(canvas, 'contextmenu', e => e.preventDefault());
+    this.listen(canvas, 'keydown', e => this.keydown(e));
+    this.listen(document, 'visibilitychange', () => {
+      cancelAnimationFrame(this.raf); this.lastTime = 0;
+      if (!document.hidden) this.raf = requestAnimationFrame(t => this.frame(t));
+    });
+    this.resize(); this.raf = requestAnimationFrame(t => this.frame(t));
+  }
+  listen(target, type, fn, opts) { target.addEventListener(type, fn, opts); this.listeners.push(() => target.removeEventListener(type, fn, opts)); }
+  resize() {
+    const rect = this.canvas.getBoundingClientRect(); this.width = rect.width; this.height = rect.height;
+    this.dpr = Math.min(devicePixelRatio || 1, { low: 1, medium: 1.25, high: 1.5 }[this.quality]);
+    this.canvas.width = Math.round(this.width * this.dpr); this.canvas.height = Math.round(this.height * this.dpr);
+    this.ctx.setTransform(this.dpr, 0, 0, this.dpr, 0, 0); this.focal = Math.min(this.width, this.height) * 1.1;
+  }
+  basis() {
+    const sy = Math.sin(this.yaw), cy = Math.cos(this.yaw), sp = Math.sin(this.pitch), cp = Math.cos(this.pitch);
+    this.right = [cy, 0, -sy]; this.up = [-sy * sp, cp, -cy * sp]; this.forward = [-sy * cp, -sp, -cy * cp];
+    this.camera = this.target.map((v, i) => v - this.forward[i] * this.distance);
+  }
+  project(position) {
+    const delta = sub(position, this.camera), depth = dot(delta, this.forward);
+    if (depth < 20) return null;
+    return { x: this.width / 2 + dot(delta, this.right) * this.focal / depth, y: this.height / 2 - dot(delta, this.up) * this.focal / depth, depth, scale: this.focal / depth };
+  }
+  matches(artist) { return (!this.filter.genreId || this.filter.genreId === artist.genreId) && (!this.filter.region || this.filter.region === artist.region); }
+  setFilters(filter) { this.filter = filter; }
+  setSelected(entity) { this.selected = entity; }
+  setQuality(tier) { this.quality = tier; this.resize(); }
+  setReducedMotion(value) { this.reducedMotion = value; if (value && this.flight) { this.target = this.flight.target; this.distance = this.flight.distance; this.flight = null; } }
+  focusArtist(id) { const artist = artistById.get(id); if (artist) { this.expanded = null; this.fly(artist.position, 640); } }
+  fly(target, distance) {
+    this.onHover(null);
+    if (this.reducedMotion) { this.target = [...target]; this.distance = distance; this.flight = null; return; }
+    this.flight = { fromTarget: [...this.target], fromDistance: this.distance, target: [...target], distance, start: performance.now() };
+  }
+  home() { this.fly([0, 0, 0], 5700); }
+  zoom(factor, x = this.width / 2, y = this.height / 2) {
+    this.flight = null; this.basis();
+    const next = clamp(this.distance * factor, 100, 11000), diff = this.distance - next;
+    const sx = (x - this.width / 2) / this.focal, sy = -(y - this.height / 2) / this.focal;
+    this.target = this.target.map((v, i) => clamp(v + (this.right[i] * sx + this.up[i] * sy) * diff, -5000, 5000));
+    this.distance = next;
+  }
+  pan(dx, dy) {
+    this.basis(); const amount = this.distance / this.focal;
+    this.target = this.target.map((v, i) => clamp(v - this.right[i] * dx * amount + this.up[i] * dy * amount, -5000, 5000));
+  }
+  pointerDown(e) {
+    this.flight = null; this.canvas.focus({ preventScroll: true }); this.canvas.setPointerCapture(e.pointerId);
+    this.pointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
+    this.down = { x: e.clientX, y: e.clientY, multi: this.pointers.size > 1, dragged: false };
+    this.onHover(null);
+  }
+  pointerMove(e) {
+    const old = this.pointers.get(e.pointerId);
+    if (!old) { const hit = this.hitTest(e.clientX, e.clientY); this.canvas.style.cursor = hit ? 'pointer' : 'grab'; this.onHover(hit, e.clientX, e.clientY); return; }
+    this.flight = null;
+    if (this.pointers.size === 2) {
+      const other = [...this.pointers.entries()].find(([id]) => id !== e.pointerId)[1];
+      const previous = Math.hypot(old.x - other.x, old.y - other.y);
+      const current = Math.hypot(e.clientX - other.x, e.clientY - other.y);
+      if (current > 5) this.zoom(previous / current, (e.clientX + other.x) / 2, (e.clientY + other.y) / 2);
+      this.pan((e.clientX - old.x) / 2, (e.clientY - old.y) / 2); this.down.multi = true;
+    } else if (e.shiftKey || e.buttons === 2) {
+      this.yaw -= (e.clientX - old.x) * .004; this.pitch = clamp(this.pitch + (e.clientY - old.y) * .004, -1.15, 1.15);
+    } else this.pan(e.clientX - old.x, e.clientY - old.y);
+    if (this.down && Math.hypot(e.clientX - this.down.x, e.clientY - this.down.y) > 6) this.down.dragged = true;
+    this.pointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
+  }
+  pointerUp(e) {
+    if (this.down && !this.down.multi && !this.down.dragged && e.button === 0) {
+      const hit = this.hitTest(e.clientX, e.clientY); if (hit) this.onSelect({ type: hit.type, id: hit.id });
+    }
+    this.pointers.delete(e.pointerId); if (!this.pointers.size) this.down = null;
+  }
+  keydown(e) {
+    const actions = { ArrowLeft: () => this.pan(70, 0), ArrowRight: () => this.pan(-70, 0), ArrowUp: () => this.pan(0, 70), ArrowDown: () => this.pan(0, -70), '+': () => this.zoom(.8), '=': () => this.zoom(.8), '-': () => this.zoom(1.25), Home: () => this.home() };
+    if (actions[e.key]) { e.preventDefault(); this.flight = null; actions[e.key](); }
+  }
+  hitTest(x, y) {
+    return this.hitNodes.filter(n => Math.hypot(n.x - x, n.y - y) < n.hitRadius).sort((a, b) => Math.hypot(a.x - x, a.y - y) - Math.hypot(b.x - x, b.y - y))[0] || null;
+  }
+  updateExpansion() {
+    if (this.expanded) {
+      const p = this.project(this.expanded.position);
+      if (length(sub(this.expanded.position, this.camera)) < 1100 && p && p.x > -150 && p.x < this.width + 150 && p.y > -150 && p.y < this.height + 150 && this.matches(this.expanded)) return;
+      this.expanded = null;
+    }
+    const candidates = artists.filter(a => this.matches(a)).map(a => ({ a, distance: length(sub(a.position, this.camera)), p: this.project(a.position) })).filter(c => c.distance < 850 && c.p && c.p.x > 30 && c.p.x < this.width - 30 && c.p.y > 60 && c.p.y < this.height - 90);
+    candidates.sort((a, b) => Math.hypot(a.p.x - this.width / 2, a.p.y - this.height / 2) - Math.hypot(b.p.x - this.width / 2, b.p.y - this.height / 2));
+    this.expanded = candidates[0]?.a || null;
+  }
+  glow(x, y, radius, color, alpha = 1) {
+    const ctx = this.ctx; ctx.globalAlpha = alpha;
+    ctx.drawImage(this.haloTexture(color), x - radius, y - radius, radius * 2, radius * 2); ctx.globalAlpha = 1;
+  }
+  haloTexture(color) {
+    if (this.haloTextures.has(color)) return this.haloTextures.get(color);
+    const texture = document.createElement('canvas'); texture.width = texture.height = 128;
+    const ctx = texture.getContext('2d'), gradient = ctx.createRadialGradient(64, 64, 0, 64, 64, 64);
+    gradient.addColorStop(0, color + 'df'); gradient.addColorStop(.08, color + '95'); gradient.addColorStop(.23, color + '25'); gradient.addColorStop(.6, color + '08'); gradient.addColorStop(1, color + '00');
+    ctx.fillStyle = gradient; ctx.fillRect(0, 0, 128, 128); this.haloTextures.set(color, texture); return texture;
+  }
+  cloudTexture(color, variant) {
+    const key = `${color}:${variant}`;
+    if (this.cloudTextures.has(key)) return this.cloudTextures.get(key);
+    const texture = document.createElement('canvas'); texture.width = texture.height = 128;
+    const ctx = texture.getContext('2d'), data = ctx.createImageData(128, 128);
+    data.data.set(cloudTexturePixels(color, variant)); ctx.putImageData(data, 0, 0);
+    this.cloudTextures.set(key, texture); return texture;
+  }
+  nebula(genre, index, alpha) {
+    const projected = this.cloudModels[index].puffs.map(puff => ({ puff, point: this.project(puff.position) })).filter(p => p.point).sort((a, b) => b.point.depth - a.point.depth);
+    const ctx = this.ctx;
+    for (const { puff, point } of projected) {
+      const radius = Math.min(650, puff.radius * point.scale);
+      if (point.x + radius < 0 || point.x - radius > this.width || point.y + radius < 0 || point.y - radius > this.height) continue;
+      ctx.save(); ctx.translate(point.x, point.y); ctx.rotate(puff.rotation + this.yaw * .12);
+      ctx.globalAlpha = puff.alpha * alpha;
+      ctx.drawImage(this.cloudTexture(genre.color, puff.variant), -radius, -radius * puff.aspect, radius * 2, radius * 2 * puff.aspect); ctx.restore();
+    }
+  }
+  planet(node, radius, time) {
+    const ctx = this.ctx, { x, y, color } = node;
+    const body = ctx.createRadialGradient(x - radius * .43, y - radius * .43, radius * .03, x + radius * .1, y + radius * .1, radius * 1.25);
+    body.addColorStop(0, '#fbf2e7'); body.addColorStop(.22, color); body.addColorStop(.55, color); body.addColorStop(.82, '#242137'); body.addColorStop(1, '#0a0c17');
+    ctx.save(); ctx.beginPath(); ctx.arc(x, y, radius, 0, Math.PI * 2); ctx.clip(); ctx.fillStyle = body; ctx.fillRect(x - radius, y - radius, radius * 2, radius * 2);
+    const phase = this.reducedMotion ? 0 : time * .02;
+    for (let i = 0; i < 4; i++) {
+      ctx.beginPath(); ctx.ellipse(x - radius * .2, y + (i - 1.5) * radius * .35, radius * 1.3, radius * .13, -.35 + phase, 0, Math.PI * 2);
+      ctx.strokeStyle = i % 2 ? '#ffffff15' : '#080b1620'; ctx.lineWidth = radius * .1; ctx.stroke();
+    }
+    ctx.restore(); ctx.beginPath(); ctx.arc(x, y, radius + .4, 0, Math.PI * 2); ctx.strokeStyle = color + '80'; ctx.lineWidth = .7; ctx.stroke();
+    if (Number(node.id.slice(-1)) % 3 === 0) {
+      ctx.beginPath(); ctx.ellipse(x, y, radius * 1.9, radius * .55, -.4, 0, Math.PI * 2); ctx.strokeStyle = color + '66'; ctx.lineWidth = Math.max(1, radius * .12); ctx.stroke();
+    }
+  }
+  frame(now) {
+    if (this.disposed) return;
+    if (this.flight) {
+      const t = clamp((now - this.flight.start) / 850, 0, 1), eased = t * t * (3 - 2 * t);
+      this.target = this.flight.fromTarget.map((v, i) => v + (this.flight.target[i] - v) * eased);
+      this.distance = this.flight.fromDistance + (this.flight.distance - this.flight.fromDistance) * eased;
+      if (t === 1) this.flight = null;
+    }
+    this.basis(); this.updateExpansion();
+    const level = this.expanded?.id || null;
+    if (level !== this.lastLevel) { this.lastLevel = level; this.onLevel(this.expanded); }
+    this.draw(now / 1000);
+    if (this.lastTime) { this.frames.push(now - this.lastTime); if (this.frames.length > 120) this.frames.shift(); }
+    this.lastTime = now;
+    if (!this.lastStats || now - this.lastStats > 1000) {
+      const sorted = [...this.frames].sort((a, b) => a - b);
+      this.onStats({ fps: Math.round(1000 / (this.frames.reduce((a, b) => a + b, 0) / this.frames.length || 16.7)), p95: Math.round(sorted[Math.floor(sorted.length * .95)] || 0), nodes: this.hitNodes.length, dpr: this.dpr }); this.lastStats = now;
+    }
+    this.raf = requestAnimationFrame(t => this.frame(t));
+  }
+  draw(time) {
+    const ctx = this.ctx; ctx.clearRect(0, 0, this.width, this.height); ctx.fillStyle = '#070a12'; ctx.fillRect(0, 0, this.width, this.height);
+    ctx.save(); ctx.translate(this.width * .54, this.height * .49); ctx.scale(1.8, .7);
+    this.glow(0, 0, this.width * .48, '#746aa8', .055); ctx.restore();
+    const count = { low: 600, medium: 1400, high: 2200 }[this.quality];
+    for (let i = 0; i < count; i++) {
+      const star = this.stars[i]; const x = ((star.x * this.width - this.yaw * 50 - this.target[0] * .003) % this.width + this.width) % this.width;
+      const y = ((star.y * this.height + this.pitch * 20 + this.target[1] * .003) % this.height + this.height) % this.height;
+      ctx.globalAlpha = (.15 + star.size * .42) * (this.reducedMotion ? 1 : .85 + .15 * Math.sin(time * .3 + star.phase)); ctx.fillStyle = '#b9c6e2'; ctx.fillRect(x, y, star.size > .97 ? 1.8 : .9, star.size > .97 ? 1.8 : .9);
+    }
+    ctx.globalAlpha = 1;
+    const cloudLabels = [];
+    for (const [index, genre] of genres.entries()) {
+      const p = this.project(genre.position); if (!p) continue;
+      const opacity = this.filter.genreId && this.filter.genreId !== genre.id ? .1 : .9;
+      this.nebula(genre, index, opacity);
+      const dust = this.cloudModels[index].dust;
+      const dustStride = { low: 4, medium: 2, high: 1 }[this.quality];
+      ctx.fillStyle = genre.color;
+      for (let i = 0; i < dust.length; i += dustStride) {
+        const particle = dust[i], point = this.project(particle.position);
+        if (!point || point.x < 0 || point.y < 0 || point.x > this.width || point.y > this.height) continue;
+        const size = clamp(particle.size * point.scale * 2, .4, 1.9); ctx.globalAlpha = particle.alpha * opacity;
+        ctx.fillRect(point.x, point.y, size, size);
+      }
+      ctx.globalAlpha = 1;
+      if (this.distance > 2300) cloudLabels.push({ genre, point: p, count: this.cloudModels[index].count });
+    }
+    const nodes = [];
+    for (const artist of artists) {
+      const p = this.project(artist.position); if (!p || p.x < -40 || p.x > this.width + 40 || p.y < -40 || p.y > this.height + 40) continue;
+      const matches = this.matches(artist), active = this.expanded?.id === artist.id, selected = this.selected?.id === artist.id;
+      const radius = clamp((6 + Math.sqrt(artist.metrics.longTermScore) * 11) * p.scale, 1.1, active ? 15 : 6);
+      nodes.push({ ...p, type: 'artist', id: artist.id, artist, radius, hitRadius: Math.max(10, radius + 5), matches, active, selected, color: artist.color, name: artist.name, metrics: artist.metrics });
+    }
+    if (this.expanded) {
+      const artist = this.expanded;
+      const center = this.project(artist.position);
+      if (center) {
+        ctx.save(); ctx.translate(center.x, center.y); ctx.rotate(-.35); ctx.scale(1.5, .6);
+        this.glow(0, 0, 150 * center.scale, artist.color, .4); ctx.restore();
+        for (let i = 0; i < 90; i++) {
+          const angle = i * 2.399 + Math.sqrt(i) * .35, radius = Math.sqrt(i) * 8;
+          const point = this.project([artist.position[0] + Math.cos(angle) * radius, artist.position[1] + Math.sin(angle) * radius * .35, artist.position[2] + Math.sin(angle) * radius * .4]);
+          if (point) { ctx.globalAlpha = .15 + (i % 5) * .1; ctx.fillStyle = artist.color; ctx.fillRect(point.x, point.y, 1.2, 1.2); }
+        }
+        ctx.globalAlpha = 1;
+      }
+      for (let orbit = 0; orbit < 2; orbit++) {
+        ctx.beginPath(); let started = false;
+        for (let i = 0; i <= 80; i++) { const angle = i / 80 * Math.PI * 2, radius = 165 + orbit * 65; const p = this.project([artist.position[0] + Math.cos(angle) * radius, artist.position[1] + Math.sin(angle) * radius * .75, artist.position[2] + Math.sin(angle) * 45]); if (!p) continue; if (!started) { ctx.moveTo(p.x, p.y); started = true; } else ctx.lineTo(p.x, p.y); }
+        ctx.strokeStyle = artist.color + '22'; ctx.lineWidth = 1; ctx.stroke();
+      }
+      tracksByArtist.get(artist.id).forEach((track, i) => {
+        const p = this.project(trackPosition(artist, i)); if (!p) return;
+        const radius = clamp((10 + Math.sqrt(track.metrics.longTermScore) * 10) * p.scale, 6, 30);
+        const ringed = Number(track.id.slice(-1)) % 3 === 0;
+        nodes.push({ ...p, type: 'track', id: track.id, artist, radius, hitRadius: Math.max(14, radius * (ringed ? 1.9 : 1.2) + 5), matches: true, selected: this.selected?.id === track.id, color: artist.color, name: track.title, metrics: track.metrics });
+        if (center) { ctx.beginPath(); ctx.moveTo(center.x, center.y); ctx.lineTo(p.x, p.y); ctx.strokeStyle = artist.color + '0d'; ctx.stroke(); }
+      });
+    }
+    nodes.sort((a, b) => b.depth - a.depth);
+    for (const node of nodes) {
+      const amplitude = this.reducedMotion ? 0 : listenerAmplitude(node.metrics.activeListeners);
+      const pulse = 1 + amplitude * Math.sin(time * Math.PI * 1.3 + node.radius);
+      const energy = node.id === this.playingTrackId && !this.reducedMotion ? this.energy * .08 : 0;
+      const radius = node.radius * (pulse + energy);
+      const alpha = node.matches ? .6 + node.metrics.recentScore * .4 : .1;
+      this.glow(node.x, node.y, radius * (node.active || node.selected ? 7 : 5), node.color, node.type === 'track' ? alpha * .5 : alpha);
+      ctx.globalAlpha = alpha;
+      if (node.type === 'track') this.planet(node, radius, time);
+      else {
+        ctx.beginPath(); ctx.arc(node.x, node.y, radius, 0, Math.PI * 2); ctx.fillStyle = node.color; ctx.fill();
+        ctx.beginPath(); ctx.arc(node.x, node.y, Math.max(.65, radius * .4), 0, Math.PI * 2); ctx.fillStyle = '#f7f5ff'; ctx.fill();
+        if (node.metrics.recentScore > .8 || node.active) {
+          ctx.beginPath(); ctx.moveTo(node.x - radius * 2.5, node.y); ctx.lineTo(node.x + radius * 2.5, node.y); ctx.moveTo(node.x, node.y - radius * 2.5); ctx.lineTo(node.x, node.y + radius * 2.5);
+          ctx.strokeStyle = node.color + '50'; ctx.lineWidth = .55; ctx.stroke();
+        }
+      }
+      if (node.selected || node.active) { ctx.beginPath(); ctx.arc(node.x, node.y, radius + 9, -.6, 1.3); ctx.arc(node.x, node.y, radius + 9, 2.55, 4.45); ctx.strokeStyle = node.color + '99'; ctx.lineWidth = .8; ctx.stroke(); }
+      ctx.globalAlpha = 1;
+    }
+    const labels = nodes.filter(n => n.matches && (n.type === 'track' || n.active || n.selected || this.distance < 4400)).sort((a, b) => Number(b.selected || b.type === 'track' || b.active) - Number(a.selected || a.type === 'track' || a.active) || a.depth - b.depth);
+    const boxes = []; const budget = { low: 12, medium: 24, high: 40 }[this.quality];
+    ctx.font = '11px "PingFang SC", sans-serif'; ctx.textAlign = 'center';
+    for (const n of labels) {
+      if (boxes.length >= budget) break;
+      const width = ctx.measureText(n.name).width + 12, y = n.y + n.radius + 20, box = { x: n.x - width / 2, y: y - 12, w: width, h: 17 };
+      if (boxes.some(b => box.x < b.x + b.w && box.x + box.w > b.x && box.y < b.y + b.h && box.y + box.h > b.y)) continue;
+      boxes.push(box); ctx.strokeStyle = '#070a12d0'; ctx.lineWidth = 3; ctx.lineJoin = 'round'; ctx.strokeText(n.name, n.x, y);
+      ctx.fillStyle = n.selected || n.type === 'track' ? '#f5f1ff' : '#e0e5ee'; ctx.fillText(n.name, n.x, y);
+    }
+    const vignette = ctx.createRadialGradient(this.width / 2, this.height * .5, Math.min(this.width, this.height) * .3, this.width / 2, this.height * .5, Math.max(this.width, this.height) * .68);
+    vignette.addColorStop(0, '#070a1200'); vignette.addColorStop(1, '#03050bb0'); ctx.fillStyle = vignette; ctx.fillRect(0, 0, this.width, this.height);
+    ctx.font = '10px "PingFang SC", sans-serif'; ctx.textAlign = 'center';
+    for (const { genre, point: p, count } of cloudLabels) {
+      const title = `${genre.name}星云 · ${count} 位`, y = p.y - 420 * p.scale - 12;
+      const width = ctx.measureText(title).width + 16;
+      ctx.fillStyle = '#070a12ba'; ctx.fillRect(p.x - width / 2, y - 12, width, 18);
+      ctx.fillStyle = genre.color; ctx.fillText(title, p.x, y);
+      ctx.beginPath(); ctx.moveTo(p.x, y + 6); ctx.lineTo(p.x, p.y - 310 * p.scale); ctx.strokeStyle = genre.color + '30'; ctx.lineWidth = .7; ctx.stroke();
+    }
+    this.hitNodes = nodes.filter(n => n.matches);
+  }
+  snapshot() { return { distance: this.distance, target: [...this.target], expandedArtist: this.expanded?.id || null, nodes: this.hitNodes.map(({ id, type, x, y }) => ({ id, type, x, y })) }; }
+  dispose() { this.disposed = true; cancelAnimationFrame(this.raf); this.resizeObserver.disconnect(); this.listeners.forEach(remove => remove()); this.haloTextures.clear(); this.cloudTextures.clear(); }
+}
+
+/** Locally generated demonstration sound. Never plays third-party recordings. */
+class DemoPlayer {
+  constructor(onChange) { this.onChange = onChange; this.track = null; this.status = 'idle'; this.offset = 0; this.volume = .3; this.voices = new Set(); this.generation = 0; }
+  ensureContext() {
+    if (this.context) return;
+    const AudioContext = window.AudioContext || window.webkitAudioContext;
+    if (!AudioContext) throw new Error('浏览器不支持演示音频播放');
+    this.context = new AudioContext(); this.gain = this.context.createGain(); this.gain.gain.value = this.volume;
+    this.analyser = this.context.createAnalyser(); this.analyser.fftSize = 256;
+    this.buffer = new Uint8Array(this.analyser.frequencyBinCount);
+    this.gain.connect(this.analyser); this.analyser.connect(this.context.destination);
+    this.context.addEventListener('statechange', () => {
+      if (this.status === 'playing' && this.context.state !== 'running') this.pause();
+    });
+  }
+  select(track) {
+    if (this.track?.id === track.id) return;
+    this.stopVoices(); this.generation++; this.track = track; this.offset = 0; this.status = 'paused'; this.emit();
+  }
+  async play() {
+    if (!this.track || this.status === 'playing') return;
+    const generation = this.generation;
+    this.ensureContext(); await this.context.resume();
+    if (generation !== this.generation || this.status === 'playing') return;
+    if (this.offset >= this.track.duration) this.offset = 0;
+    this.startedAt = this.context.currentTime - this.offset; this.nextBeat = Math.ceil(this.offset / .38);
+    this.status = 'playing'; this.tick(); this.timer = setInterval(() => this.tick(), 100); this.emit();
+  }
+  pause() {
+    this.generation++;
+    if (this.status === 'playing') this.offset = Math.min(this.track.duration, this.context.currentTime - this.startedAt);
+    this.stopVoices(); if (this.track) this.status = 'paused'; this.emit();
+  }
+  toggle() { if (this.status === 'playing') { this.pause(); return Promise.resolve(); } return this.play(); }
+  setVolume(value) { this.volume = value; if (this.gain) this.gain.gain.setTargetAtTime(value, this.context.currentTime, .03); }
+  tick() {
+    if (this.status !== 'playing') return;
+    const now = this.context.currentTime, elapsed = now - this.startedAt;
+    if (elapsed >= this.track.duration) { this.offset = this.track.duration; this.stopVoices(); this.status = 'ended'; this.emit(); return; }
+    const root = [130.81, 146.83, 164.81, 174.61, 196, 220][this.track.seed % 6];
+    const notes = [0, 7, 12, 16, 19, 16, 12, 7];
+    while (this.nextBeat * .38 < Math.min(elapsed + .3, this.track.duration)) {
+      const beat = this.nextBeat++, at = Math.max(now, this.startedAt + beat * .38);
+      this.note(root * Math.pow(2, notes[(beat + this.track.seed) % notes.length] / 12), at, .7, .07, 'sine');
+      if (beat % 8 === 0) this.note(root / 2, at, 2.6, .07, 'triangle');
+    }
+    this.emit();
+  }
+  note(frequency, at, duration, level, type) {
+    const oscillator = this.context.createOscillator(), envelope = this.context.createGain();
+    oscillator.type = type; oscillator.frequency.value = frequency;
+    envelope.gain.setValueAtTime(0, at); envelope.gain.linearRampToValueAtTime(level, at + .035); envelope.gain.exponentialRampToValueAtTime(.0001, at + duration);
+    oscillator.connect(envelope); envelope.connect(this.gain); const voice = { oscillator, envelope }; this.voices.add(voice);
+    oscillator.onended = () => { oscillator.disconnect(); envelope.disconnect(); this.voices.delete(voice); };
+    oscillator.start(at); oscillator.stop(at + duration + .02);
+  }
+  stopVoices() {
+    clearInterval(this.timer); this.timer = null;
+    for (const voice of this.voices) { voice.oscillator.onended = null; try { voice.oscillator.stop(); } catch {} voice.oscillator.disconnect(); voice.envelope.disconnect(); }
+    this.voices.clear();
+  }
+  energy() { if (this.status !== 'playing') return 0; this.analyser.getByteFrequencyData(this.buffer); return Math.min(1, this.buffer.reduce((a, b) => a + b, 0) / this.buffer.length / 80); }
+  snapshot() { return { trackId: this.track?.id || null, status: this.status, elapsed: this.status === 'playing' ? Math.min(this.track.duration, this.context.currentTime - this.startedAt) : this.offset }; }
+  emit() { this.onChange(this.snapshot()); }
+  dispose() { this.generation++; this.stopVoices(); this.status = 'idle'; this.context?.close(); }
+}
+
+
+const $ = id => document.getElementById(id);
+const escape = value => String(value).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+const state = { selected: null, filter: { genreId: '', region: '' }, reducedMotion: matchMedia('(prefers-reduced-motion: reduce)').matches };
+let engine, notifyTimer;
+const formatTime = seconds => `${Math.floor(seconds / 60)}:${String(Math.floor(seconds % 60)).padStart(2, '0')}`;
+function notify(message) { $('notice').textContent = message; $('notice').hidden = false; clearTimeout(notifyTimer); notifyTimer = setTimeout(() => { $('notice').hidden = true; }, 4500); }
+function listenersText(value) { return value === null ? '未知' : `${value} 人`; }
+const player = new DemoPlayer(snapshot => {
+  const track = trackById.get(snapshot.trackId), artist = track && artistById.get(track.artistId);
+  $('play-toggle').disabled = !track;
+  $('play-toggle').textContent = snapshot.status === 'playing' ? 'Ⅱ' : '▶';
+  $('play-toggle').setAttribute('aria-label', snapshot.status === 'playing' ? '暂停' : '播放合成演示音频');
+  $('player-title').textContent = track?.title || '让好奇心带路';
+  $('player-subtitle').textContent = track ? `${artist.name} · 合成演示音频，非真实作品` : '点一颗歌手星，靠近后发现歌曲';
+  $('elapsed').textContent = formatTime(snapshot.elapsed); $('progress').value = snapshot.elapsed;
+  if (engine) { engine.playingTrackId = snapshot.status === 'playing' ? snapshot.trackId : null; engine.energy = player.energy(); }
+  const button = $('detail-play');
+  if (button) button.textContent = snapshot.status === 'playing' && snapshot.trackId === state.selected?.id ? 'Ⅱ 暂停演示试听' : '▶ 播放演示试听';
+});
+function select(entity, { focus = false } = {}) {
+  state.selected = entity; engine?.setSelected(entity); $('detail-panel').hidden = false;
+  const track = entity.type === 'track' ? trackById.get(entity.id) : null;
+  const artist = artistById.get(track ? track.artistId : entity.id);
+  if (!artist) return;
+  if (focus) engine?.focusArtist(artist.id);
+  $('intro').classList.add('quiet');
+  const genre = genres.find(g => g.id === artist.genreId);
+  const neighbors = artists.filter(a => a.genreId === artist.genreId && a.id !== artist.id).slice(0, 4);
+  const metric = track?.metrics || artist.metrics;
+  $('detail-panel').innerHTML = `<div class="panel-heading"><span class="eyebrow" style="margin:0">${track ? 'TRACK / 歌曲星球' : 'ARTIST / 歌手星系'}</span><button class="icon-button" data-action="close" aria-label="关闭详情">×</button></div>
+    <div class="detail-orb" style="--orb-color:${artist.color}"><span></span></div><h2>${escape(track?.title || artist.name)}</h2>
+    <p><span class="tag">${escape(genre.name)}</span><span class="tag">${track ? escape(artist.name) : '虚构歌手'}</span><span class="tag">演示</span></p>
+    <p class="description">${track ? '45 秒本地合成声音，用于体验播放与星球律动，不是该虚构歌曲的真实录音。播放时可以继续漫游。' : escape(artist.description)}</p>
+    <div class="metric-row"><span>模拟共同收听 · 演示</span><strong>${listenersText(metric.activeListeners)}</strong></div>
+    ${track ? '<button class="primary-button" id="detail-play" data-action="play">▶ 播放演示试听</button><button class="primary-button" data-action="artist">查看歌手星系</button>' : '<button class="primary-button" data-action="focus">靠近这位歌手 ↗</button><p class="muted">也可以直接移动、缩放靠近；歌曲会自然展开。</p>'}
+    <div class="section-caption">${track ? '同一星系的歌曲' : '星系里的歌曲'}</div>
+    ${tracksByArtist.get(artist.id).map((t, i) => `<div class="track-row"><span class="track-dot"></span><button data-track="${t.id}">${escape(t.title)}</button><small>0:45</small></div>`).join('')}
+    <div class="section-caption">继续发现 · 演示风格相近</div><div class="neighbors">${neighbors.map(a => `<button data-artist="${a.id}">${escape(a.name)}</button>`).join('')}</div>`;
+  if (track && !player.track) player.select(track);
+}
+function showHover(hit, x, y) {
+  const tooltip = $('tooltip'); tooltip.hidden = !hit;
+  if (!hit) return;
+  tooltip.innerHTML = `${escape(hit.name)}<small>${hit.type === 'track' ? '歌曲星球 · 点击查看播放' : `${genres.find(g => g.id === hit.artist.genreId).name} · 靠近发现歌曲`}</small>`;
+  tooltip.style.left = `${Math.min(innerWidth - 220, Math.max(8, x + 17))}px`;
+  tooltip.style.top = `${Math.max(10, Math.min(innerHeight - 140, y + 17))}px`;
+}
+try {
+  engine = new GalaxyEngine($('galaxy'), {
+    onSelect: entity => select(entity), onHover: showHover,
+    onLevel: artist => { $('location').textContent = artist ? `${artist.name} / 歌曲星系` : '宇宙漫游'; $('intro').classList.toggle('quiet', Boolean(artist || state.selected)); },
+    onStats: stats => { $('stats').textContent = `${stats.fps} FPS · P95 帧间隔 ${stats.p95} ms · 像素比 ${stats.dpr}\n${stats.nodes} 个可点击节点（本机测量）`; }
+  }); engine.setReducedMotion(state.reducedMotion);
+} catch (error) { notify(error.message); $('catalog-panel').hidden = false; }
+$('reduced-motion').checked = state.reducedMotion;
+function renderResults() {
+  const query = $('search').value.trim().toLowerCase();
+  const filtered = artists.filter(a => (!state.filter.genreId || a.genreId === state.filter.genreId) && (!state.filter.region || a.region === state.filter.region));
+  const matches = [];
+  for (const artist of filtered) {
+    if (!query || artist.name.toLowerCase().includes(query)) matches.push({ type: 'artist', id: artist.id, title: artist.name, subtitle: `${genres.find(g => g.id === artist.genreId).name} · 虚构歌手` });
+    if (query) for (const track of tracksByArtist.get(artist.id)) if (track.title.toLowerCase().includes(query)) matches.push({ type: 'track', id: track.id, title: track.title, subtitle: `${artist.name} · 演示歌曲` });
+  }
+  $('result-count').textContent = `${matches.length} 个结果`;
+  $('visible-count').textContent = `${filtered.length} 位匹配歌手`;
+  $('results').innerHTML = matches.length ? matches.map(item => `<button class="result" data-id="${item.id}" data-type="${item.type}"><strong>${escape(item.title)}</strong><small>${escape(item.subtitle)}</small></button>`).join('') : '<p class="empty-state">这片星域暂时没有匹配结果。试试清除筛选，或换一个名字。</p>';
+}
+function applyFilters() {
+  engine?.setFilters({ ...state.filter }); renderResults();
+  document.querySelectorAll('[data-genre]').forEach(button => { const active = button.dataset.genre === state.filter.genreId; button.classList.toggle('active', active); button.setAttribute('aria-pressed', String(active)); });
+}
+$('genre-buttons').innerHTML = genres.map(g => `<button class="genre-button" data-genre="${g.id}" style="--genre:${g.color}" aria-pressed="false"><i></i>${g.name}</button>`).join('');
+$('genre-buttons').addEventListener('click', e => {
+  const button = e.target.closest('[data-genre]'); if (!button) return;
+  state.filter.genreId = state.filter.genreId === button.dataset.genre ? '' : button.dataset.genre; applyFilters();
+  if (state.filter.genreId) { const genre = genres.find(g => g.id === state.filter.genreId); engine?.fly(genre.position, 2000); $('intro').classList.add('quiet'); }
+});
+$('region').addEventListener('change', () => { state.filter.region = $('region').value; applyFilters(); });
+$('clear-filters').addEventListener('click', () => { state.filter = { genreId: '', region: '' }; $('region').value = ''; $('search').value = ''; applyFilters(); });
+$('search').addEventListener('input', renderResults);
+$('search-toggle').addEventListener('click', () => { $('catalog-panel').hidden = !$('catalog-panel').hidden; if (!$('catalog-panel').hidden) $('search').focus(); });
+$('search-close').addEventListener('click', () => { $('catalog-panel').hidden = true; $('search-toggle').focus(); });
+$('results').addEventListener('click', e => { const button = e.target.closest('[data-id]'); if (!button) return; select({ type: button.dataset.type, id: button.dataset.id }, { focus: true }); $('catalog-panel').hidden = true; });
+$('detail-panel').addEventListener('click', async e => {
+  const trackButton = e.target.closest('[data-track]'), artistButton = e.target.closest('[data-artist]');
+  if (trackButton) { select({ type: 'track', id: trackButton.dataset.track }); return; }
+  if (artistButton) { select({ type: 'artist', id: artistButton.dataset.artist }, { focus: true }); return; }
+  const action = e.target.closest('[data-action]')?.dataset.action;
+  const artistId = state.selected?.type === 'track' ? trackById.get(state.selected.id).artistId : state.selected?.id;
+  if (action === 'close') { $('detail-panel').hidden = true; $('galaxy').focus(); }
+  if (action === 'focus') engine?.focusArtist(artistId);
+  if (action === 'artist') select({ type: 'artist', id: artistId });
+  if (action === 'play') {
+    try { player.select(trackById.get(state.selected.id)); await player.toggle(); }
+    catch (error) { notify(`播放失败：${error.message}`); }
+  }
+});
+$('play-toggle').addEventListener('click', async () => { try { await player.toggle(); } catch (error) { notify(`播放失败：${error.message}`); } });
+$('volume').addEventListener('input', () => player.setVolume(Number($('volume').value)));
+$('home').addEventListener('click', () => { engine?.home(); $('detail-panel').hidden = true; state.selected = null; engine?.setSelected(null); $('intro').classList.remove('quiet'); });
+$('zoom-in').addEventListener('click', () => engine?.zoom(.75)); $('zoom-out').addEventListener('click', () => engine?.zoom(1.33));
+$('settings-toggle').addEventListener('click', () => { $('settings-panel').hidden = !$('settings-panel').hidden; });
+$('settings-close').addEventListener('click', () => { $('settings-panel').hidden = true; $('settings-toggle').focus(); });
+$('quality').addEventListener('change', () => engine?.setQuality($('quality').value));
+$('reduced-motion').addEventListener('change', () => { state.reducedMotion = $('reduced-motion').checked; engine?.setReducedMotion(state.reducedMotion); });
+matchMedia('(prefers-reduced-motion: reduce)').addEventListener('change', e => { state.reducedMotion = e.matches; $('reduced-motion').checked = e.matches; engine?.setReducedMotion(e.matches); });
+document.addEventListener('keydown', e => { if (e.key === 'Escape') { $('catalog-panel').hidden = true; $('detail-panel').hidden = true; $('settings-panel').hidden = true; $('galaxy').focus(); } });
+window.addEventListener('pagehide', () => { engine?.dispose(); player.dispose(); });
+window.addEventListener('pageshow', e => { if (e.persisted) location.reload(); });
+renderResults();
+// Read-only diagnostic surface for local QA; does not provide a second navigation path.
+window.musicGalaxy = { snapshot: () => ({ scene: engine?.snapshot(), playback: player.snapshot(), selected: state.selected, filters: { ...state.filter } }) };
+</script>
+</body>
+</html>

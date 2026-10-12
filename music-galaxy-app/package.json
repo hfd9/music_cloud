@@ -1,0 +1,13 @@
+{
+  "name": "music-galaxy-interaction-prototype",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "node scripts/serve.mjs",
+    "build:preview": "node scripts/build-preview.mjs",
+    "check": "node --check prototype/src/app.js && node --check prototype/src/catalog.js && node --check prototype/src/clouds.js && node --check prototype/src/galaxy.js && node --check prototype/src/player.js",
+    "test": "node --test tests/*.test.mjs"
+  },
+  "engines": { "node": ">=22" }
+}
